@@ -1,0 +1,190 @@
+#include <iostream>
+#include <conio.h>
+#include <ctime>
+#include <windows.h>
+using namespace std;
+
+
+void Print(char matr[3][3]);
+void Check(char matr[3][3]);
+void Win(char matr[3][3]);
+
+
+void main()
+{
+
+	char matr[3][3] = { 50, 49, 53, 55, 54, 56, 51, 52, ' '};
+	int c = 0;
+	srand(time(0));
+	while(true)
+	{
+		system("cls");
+		Print(matr);
+		Win(matr);
+		Check(matr);
+	}
+
+	system("pause");
+}
+
+void Win(char matr[3][3])
+{
+	int a = 49;
+	bool f = true;
+	for(int  i = 0 ; i < 3; i++)
+	{
+		for(int j = 0; j < 3; j++)
+		{
+			if (a == 57)
+				break;
+			if (matr[i][j] != a)
+			{
+				f = false;
+				break;
+			}
+			a++;
+
+		}
+		if (a == 57)
+			break;
+		if (f == false)
+			break;
+		
+	}
+	if (f)
+	{
+		cout << "STOP" << endl;
+		Sleep(3000);
+		system("cls");
+		cout << "Time = " << clock()/1000.0 - 3<< " sec " << endl;
+		Sleep(3000);
+		exit(0);
+	}
+}
+void Check(char matr[3][3])
+{
+		int code = _getch();
+		switch(code)
+		{
+			// влево
+		case 97:
+		{
+			for (int i = 0; i < 3; i++)
+				for (int j = 0; j < 3; j++)
+				{
+					if (matr[i][j] == ' ')
+					{
+						if (j == 2)
+							break;
+						else
+						{
+							matr[i][j] = matr[i][j + 1];
+							matr[i][j + 1] = ' ';
+
+							break;
+						}
+					}
+				}
+				break;
+		}	
+			// вверх
+		case 119:
+		{	
+			for (int j = 0; j < 3; j++)
+				for (int i = 0; i < 3; i++)
+				{
+					if (matr[i][j] == ' ')
+					{
+						if (i == 2)
+							break;
+						else
+						{
+							matr[i][j] = matr[i + 1][j];
+							matr[i + 1][j] = ' ';
+
+							break; 
+						}
+					}
+				}
+			break;
+			
+		}	
+			
+			// вправо
+		case 100:
+			{
+				for (int i = 0; i < 3; i++)
+					for (int j = 0; j < 3; j++)
+					{
+						if (matr[i][j + 1] == ' ')
+						{
+							if (j == 2)
+								break;
+							else
+							{
+								matr[i][j + 1] = matr[i][j];
+								matr[i][j] = ' ';
+
+								break;
+							}
+						}
+					}
+				break;
+
+			
+			}	
+
+			// вниз
+		case 115:
+		{
+			for (int i = 0; i < 3; i++)
+				for (int j = 0; j < 3; j++)
+				{
+					if (matr[i + 1][j] == ' ')
+					{
+						if (i == 2)
+							break;
+						else
+						{
+							matr[i + 1][j] = matr[i][j];
+							matr[i][j] = ' ';
+						
+							break;
+						}
+					}
+				}
+			break;
+			
+		}
+	    }
+}
+
+void Print(char matr[3][3])
+{
+	cout << "\t\t\t\t";
+	for (int i = 0; i < 13; i++)
+		cout << "\xCD";
+	cout << endl;
+	for (int i = 0; i < 3; i++)
+	{
+		cout << "\t\t\t\t";
+		cout << "\xBA ";
+		for (int j = 0; j < 3; j++)
+			cout << matr[i][j] << " \xBA ";
+		cout << endl;
+		cout << "\t\t\t\t";
+		for (int i = 0; i < 13; i++)
+			cout << "\xCD";
+		cout << endl;
+	}
+	
+}
+
+
+
+
+
+
+
+
+
